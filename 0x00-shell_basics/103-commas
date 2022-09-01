@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -am -p --indicator-style=slash -X
+ls -am -p --indicator-style=slash -X|sort -d
