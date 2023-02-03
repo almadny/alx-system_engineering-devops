@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#A Batch script to dispaly all ip in this device
+
+ipaddr=$(hostname -I)
+
+ipaddress=("${ipaddr//" "/}")
+for ip in "${ipaddress[@]}";
+do
+	printf "%s\n" "$ip"
+done
