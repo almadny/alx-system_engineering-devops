@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Configure an NGINX Server
+touch new_index.html
+#Configure the server to return hello world
+echo "server {\n\tlisten 80;\n\troot /var/www/html;\n}" > new_index.html

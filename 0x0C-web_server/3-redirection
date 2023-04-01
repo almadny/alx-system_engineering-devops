@@ -7,17 +7,13 @@ sudo apt install nginx -y
 
 #Change the ownership and permission of the var/www/html directory and subdirectories to the current user
 sudo chown -R $USER:$USER /var/www
-sudo chown -R $USER:$USER /etc/nginx
 
 #Give execute permission to the user (owner) of the file
 sudo chmod -R 755 /var/www
-sudo chmod -R 755 /etc/nginx
 
-#Allow connections on port 80
-sudo ufw allow 'Nginx HTTP'
+#Configure the server to return hello world
+echo 'Hello World!' > /var/www/html/index.html  
 
-#Create a new index page
-echo 'Hello World!' > /var/www/html/index.html
 
 # Reload the Server
 sudo nginx -s reload
