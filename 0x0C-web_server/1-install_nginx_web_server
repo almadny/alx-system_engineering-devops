@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Configure an NGINX Server
+
+#Install Nginx Server
+sudo apt update && sudo apt upgrade -y
+sudo apt install nginx -y
+
+#Change the ownership and permission of the var/www/html directory and subdirectories to the current user
+sudo chown -R $USER:$USER /var/www
+
+#Give execute permission to the user (owner) of the file
+sudo chmod -R 755 /var/www
+
+#Configure the server to return hello world
+echo 'Hello World!' > /var/www/html/index.html  
+
+
+# Reload the Server
+sudo nginx -s reload
