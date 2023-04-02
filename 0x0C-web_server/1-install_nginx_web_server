@@ -20,4 +20,4 @@ sudo ufw allow 'Nginx HTTP'
 echo 'Hello World!' > /var/www/html/index.html
 
 # Reload the Server
-sudo nginx -s reload
+sudo service nginx restart
