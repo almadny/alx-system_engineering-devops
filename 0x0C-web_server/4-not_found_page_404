@@ -16,11 +16,14 @@ sudo chmod -R 755 /etc/nginx
 #Allow connections on port 80
 sudo ufw allow 'Nginx HTTP'
 
-#Replace the above text
-sed -i 's/index index.html;/index index.html;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/nairaland.com;\n\t}/g' /etc/nginx/sites-enabled/default
+#Configure the 404 error directive and redirection
+sed -i 's/index index.html;/index index.html;\n\terror_page 404\/404.html\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/nairaland.com;\n\t}/g' /etc/nginx/sites-enabled/default
+
+#Create the error page
+echo "Ceci n'est pas une page" > /var/www/html/404.html
 
 #Create a new index page
 echo 'Hello World!' > /var/www/html/index.html
 
 # Reload the Server
-sudo nginx -s reload
+sudo service nginx reload
