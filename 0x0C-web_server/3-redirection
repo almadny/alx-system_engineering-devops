@@ -17,8 +17,8 @@ sudo chmod -R 755 /etc/nginx
 echo 'Hello World!' > /var/www/html/index.html
 
 #Configure redirection
-#sed -i 's/index index.html;/index index.html;\n\n\trewrite ^\/redirect_me https:\/\/nairaland.com permanent;/' /etc/nginx/sites-enabled/default
-sed -i 's/index index.html;/index index.html;\n\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/nairaland.com;\n\t}/' /etc/nginx/sites-enabled/default
+sed -i 's/index index.html;/index index.html;\n\n\trewrite ^\/redirect_me https:\/\/nairaland.com permanent;/' /etc/nginx/sites-enabled/default
+#sed -i 's/index index.html;/index index.html;\n\treturn 301 https:\/\/nairaland.com;/' /etc/nginx/sites-enabled/default
 
 
 # Reload the Server
