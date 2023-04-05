@@ -5,22 +5,12 @@
 sudo apt-get update
 sudo apt-get install -y nginx
 
-#Change the ownership and permission of the var/www/html directory and subdirectories to the current user
-sudo chown -R "$USER":"$USER" /var/www
-sudo chown -R "$USER":"$USER" /etc/nginx
-
-#Give execute permission to the user (owner) of the file
-sudo chmod -R 755 /var/www
-sudo chmod -R 755 /etc/nginx
-
 #Create a new index page
 echo 'Hello World!' > /var/www/html/index.html
 
-#Replacement
-replacement_str="index index.html;\n\trewrite ^\/redirect_me https:\/\/www.nairaland.com permanent;"
-
-#Configure redirection
-sed -i "s/index index.html;/$replacement_str/" /etc/nginx/sites-enabled/default
+#Configure Redirection
+replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
+sudo sed -i "s/server_name _;/$replacement/" /etc/nginx/sites-enabled/default
 
 # Reload the Server
 service nginx restart
