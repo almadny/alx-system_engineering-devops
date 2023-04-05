@@ -16,8 +16,11 @@ sudo chmod -R 755 /etc/nginx
 #Create a new index page
 echo 'Hello World!' > /var/www/html/index.html
 
+#Replacement
+replacement_str="index index.html;\n\trewrite ^\/redirect_me https:\/\/www.nairaland.com permanent;"
+
 #Configure redirection
-sed -i "s/index index.html;/index index.html;\n\trewrite ^\/redirect_me https:\/\/nairaland.com permanent;/" /etc/nginx/sites-enabled/default
+sed -i "s/index index.html;/$replacement_str/" /etc/nginx/sites-enabled/default
 
 # Reload the Server
 service nginx restart
