@@ -5,22 +5,41 @@
 sudo apt-get update
 sudo apt-get install nginx -y
 
-#Create a new index page
-echo 'Hello World!' > /var/www/html/index.html
+#Create the website directory
+mkdir /etc/nginx/html
 
-#Create the error page
-echo "Ceci n'est pas une page" > /var/www/html/404.html
+#Create the index and 404 page
+touch /etc/nginx/html/index.html
 
-#Configure redirection
-string_redirect="server_name_;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
-#sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+#Create 404 Error Page
+touch /etc/nginx/html/404.html
 
-#Replacement text for 404 error directive
-string_404="error_page 404 \/404.html;\n\tlocation =\/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+#Write Hello World in the index page
+echo 'Hello World!' > /etc/nginx/html/index.html
 
-#Configure the 404 error directive
-#string_new="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/server_name_;/$string_redirect$string_404/" /etc/nginx/sites-enabled/default
+#Write the error message in the 404 error page
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
+
+#create configuration file
+printf %s "		server {
+		listen 80 default_server;
+		listen [::]:80 default_server;
+
+		root /etc/nginx/html;
+		index index.html index.htm;
+
+		error_page 404 /404.html;
+		location /404 {
+			root /etc/nginx/html;
+			internal;
+		}
+
+		location /redirect_me {
+			return 301 https://www.youtube.com;
+		}
+	    }
+" > /etc/nginx/sites-enabled/default
+
 
 # Restart the Server
 sudo service nginx restart
