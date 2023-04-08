@@ -5,6 +5,9 @@
 sudo apt update
 sudo apt install haproxy -y
 
+#Enable management via the init script
+sudo ch -c 'echo "ENABLED=1" >> /etc/default/haproxy'
+
 #Configure haproxy
 sudo sh -c 'printf %s "frontend websites
    bind *:80
