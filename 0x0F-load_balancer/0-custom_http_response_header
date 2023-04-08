@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Configure an NGINX Server
+
+#Install Nginx Server
+sudo apt-get update
+sudo apt-get install nginx -y
+
+#Write Hello World in the index page
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+
+#Write the error message in the 404 error page
+sudo sh -c 'echo "Ceci n'\''est pas une page" > /var/www/html/404.html'
+
+#create configuration file
+sudo sh -c 'printf %s "
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	add_header X-Served-By \$hostname;
+
+	root /var/www/html;
+	index index.html index.htm;
+
+	error_page 404 /404.html;
+	location /404 {
+		root /var/www/html;
+		internal;
+	}
+
+	location /redirect_me {
+		return 301 https://www.youtube.com;
+	}
+}
+" > /etc/nginx/sites-enabled/default'
+
+
+# Restart the Server
+sudo service nginx restart
