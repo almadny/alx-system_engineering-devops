@@ -15,4 +15,4 @@ backend webservers
    server webserver2 54.152.144.111:80" >> /etc/haproxy/haproxy.cfg'
 
 # Restart HAProxy
-sudo service haproxy restart
+sudo service haproxy start
