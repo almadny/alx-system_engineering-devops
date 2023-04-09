@@ -10,3 +10,10 @@ sudo ufw allow 'Nginx HTTP'
 
 #Start the Nginx Service
 sudo service nginx start
+
+#Install curl and ufw
+sudo apt-get install curl
+sudo apt-get install ufw
+
+#Allow port 80 through firewall
+sudo ufw allow 'Nginx HTTP'
