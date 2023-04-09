@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script to activate or allow firewall access on the Nginx
+
+# Install Nginx
+sudo apt-get update
+sudo apt-get install nginx -y
+
+#Allow port 80 through firewall
+sudo ufw allow 'Nginx HTTP'
+
+#Start the Nginx Service
+sudo service nginx start
