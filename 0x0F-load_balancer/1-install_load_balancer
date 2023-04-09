@@ -18,11 +18,12 @@ sudo sh -c 'printf %s "frontend websites
 backend webservers
    balance roundrobin
    mode http
-   server webserver1 54.172.175.168:80
-   server webserver2 54.152.144.111:80" >> /etc/haproxy/haproxy.cfg'
+   server webserver1 54.172.175.168:80 check
+   server webserver2 54.152.144.111:80 check
+" >> /etc/haproxy/haproxy.cfg'
 
 #Enable management via the init script
-sudo ch -c 'echo "ENABLED=1" >> /etc/default/haproxy'
+sudo sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/haproxy
 
 # Restart HAProxy
 sudo service haproxy start
