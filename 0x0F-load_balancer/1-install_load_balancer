@@ -2,17 +2,16 @@
 # Configure load balancer to serve distribute traffic among two webserver
 
 #Install HAProxy
-sudo apt update
+sudo apt update -y
 sudo apt install haproxy -y
 
 #Configure haproxy
 sudo sh -c 'printf %s "frontend websites
    bind *:80
-   mode http
    default_backend webservers
+
 backend webservers
    balance roundrobin
-   mode http
    server webserver1 54.172.175.168:80 check
    server webserver2 54.152.144.111:80 check
 " >> /etc/haproxy/haproxy.cfg'
@@ -21,4 +20,4 @@ backend webservers
 sudo sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/haproxy
 
 # Restart HAProxy
-sudo service haproxy start
+sudo service haproxy restart
