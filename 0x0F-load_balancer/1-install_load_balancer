@@ -10,9 +10,6 @@ sudo add-apt-repository ppa:vbernat/haproxy-2.0
 sudo apt update
 sudo apt install haproxy -y
 
-#Enable management via the init script
-sudo ch -c 'echo "ENABLED=1" >> /etc/default/haproxy'
-
 #Configure haproxy
 sudo sh -c 'printf %s "frontend websites
    bind *:80
@@ -23,6 +20,9 @@ backend webservers
    mode http
    server webserver1 54.172.175.168:80
    server webserver2 54.152.144.111:80" >> /etc/haproxy/haproxy.cfg'
+
+#Enable management via the init script
+sudo ch -c 'echo "ENABLED=1" >> /etc/default/haproxy'
 
 # Restart HAProxy
 sudo service haproxy start
