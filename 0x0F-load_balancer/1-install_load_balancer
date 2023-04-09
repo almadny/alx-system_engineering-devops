@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 # Configure load balancer to serve distribute traffic among two webserver
-#Install software properties common package
-sudo apt install software-properties-common -y
-
-#Reference the HAProxy Repository
-sudo add-apt-repository ppa:vbernat/haproxy-2.0
 
 #Install HAProxy
 sudo apt update
