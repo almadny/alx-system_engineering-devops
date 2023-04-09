@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Script to fix Apache Server not started and unable to start
+
+#Add ServerName directive to apache2.conf
+echo "ServerName 0:8080" >> /etc/apache2/apache2.conf
+
+#Restart the Server
+sudo service apache2 restart
