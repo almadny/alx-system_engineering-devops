@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
 # Script to activate or allow firewall access on the Nginx
-
-# Edit the default configuration file in /etc/sites-enabled directory
-text_to_edit="listen 8080 default_server;\n\tlisten [::]:8080 default_server;"
-text_to_add="listen 80 default_server;\n\tlisten [::]:80 default_server;\n"
-
-sudo sed -i "s/$text_to_edit/$text_to_add/g" /etc/nginx/sites-enabled/default
-
-#Restart Nginx
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
