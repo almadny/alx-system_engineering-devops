@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
 # Script to activate or allow firewall access on the Nginx
 
-# Install Nginx
-sudo apt-get update
-sudo apt-get install nginx -y
+# Edit the default configuration file in /etc/sites-enabled directory
+text_to_edit="listen 8080 default_server;\n\tlisten [::]:8080 default_server;"
+text_to_add="listen 80 default_server;\n\tlisten [::]:80 default_server;\n"
 
-#Allow port 80 through firewall
-sudo ufw allow 'Nginx HTTP'
+sudo sed -i "s/$text_to_edit/$text_to_add/g" /etc/nginx/sites-enabled/default
 
-#Start the Nginx Service
-sudo service nginx start
-
-#Install curl and ufw
-sudo apt-get install curl
-sudo apt-get install ufw
-
-#Allow port 80 through firewall
-sudo ufw allow 'Nginx HTTP'
+#Restart Nginx
+sudo service nginx restart
