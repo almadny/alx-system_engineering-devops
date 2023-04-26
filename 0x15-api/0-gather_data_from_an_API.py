@@ -1,15 +1,13 @@
 #!/usr/bin/python3
-"""Script to information about an employee TODO list progress"""
+"""Script to information about an employee TODO list progress."""
 import requests
 import sys
 
 
 if __name__ == "__main__":
-    # request for todo list and employees
     todo_list = requests.get("https://jsonplaceholder.typicode.com/todos")
     emp_list = requests.get("https://jsonplaceholder.typicode.com/users")
 
-    # convert todo response to a dictionary (deserialize todo)
     todo_dict = todo_list.json()
     emp_dict = emp_list.json()
 
