@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Script to information about an employee TODO list progress """
+""" Script to information about an employee
+TODO list progress
+"""
 import requests
 import sys
 
