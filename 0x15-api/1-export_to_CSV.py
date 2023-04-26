@@ -2,6 +2,7 @@
 """ Script to information about an employee
 TODO list progress
 """
+
 import csv
 import requests
 import sys
@@ -32,11 +33,13 @@ if __name__ == "__main__":
             emp_username = emp.get('username')
 
     for todo in emp_todo:
-        row = f"{str(user_id), emp_username, todo.get('completed'), todo.get('title')}"
-        list_to_export.append(eval(row))
+        row = f"{str(user_id)}, {emp_username}, {todo.get('completed')}, " \
+              f"{todo.get('title')}"
+        list_to_export.append(row)
+    print(list_to_export)
 
-    with open(csv_filename, 'w', newline='') as filename:
+    with open(csv_filename, 'w') as filename:
         writer = csv.writer(filename, quoting=csv.QUOTE_ALL)
         for row in list_to_export:
-            writer.writerow(row)
-
+            sub_string = row.split(', ')
+            writer.writerow(sub_string)
