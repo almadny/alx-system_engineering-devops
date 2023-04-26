@@ -3,6 +3,7 @@
 import requests
 import sys
 
+
 if __name__ == "__main__":
     # request for todo list and employees
     todo_list = requests.get("https://jsonplaceholder.typicode.com/todos")
