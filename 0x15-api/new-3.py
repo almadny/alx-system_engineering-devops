@@ -6,6 +6,8 @@ import sys
 
 
 if __name__ == "__main__":
+    # Create a function that query the route. The function should accept employee id
+    # Create a function that loops through all the employee 
     todo_list = requests.get("https://jsonplaceholder.typicode.com/todos")
     emp_list = requests.get("https://jsonplaceholder.typicode.com/users")
 
