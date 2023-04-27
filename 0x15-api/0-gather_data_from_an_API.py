@@ -40,4 +40,4 @@ if __name__ == "__main__":
 
     for i in range(len(emp_todo)):
         if emp_todo[i].get('completed'):
-            print(f"\t {emp_todo[i].get('title')}")
+            print("\t {}".format(emp_todo[i].get('title')))

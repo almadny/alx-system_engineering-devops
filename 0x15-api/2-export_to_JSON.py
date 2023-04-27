@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Script to information about an employee TODO list progress."""
-import csv
+import json
 import requests
 import sys
 
@@ -15,9 +15,10 @@ if __name__ == "__main__":
     emp_todo = []
     emp_name = ''
     user_id = int(sys.argv[1])
-    csv_filename = "{}.{}".format(int(sys.argv[1]), "csv")
+    json_filename = "{}.{}".format(int(sys.argv[1]), "json")
     emp_username = ''
     list_to_export = []
+    dict_to_export = {}
 
     for todo in todo_dict:
         if todo.get('userId') == user_id:
@@ -28,14 +29,12 @@ if __name__ == "__main__":
             emp_username = emp.get('username')
 
     for todo in emp_todo:
-        row = "{}, {}, {}, {}".format(
-               str(user_id), emp_username,
-               todo.get('completed'), todo.get('title')
-               )
+        row = f"{str(user_id)}, {emp_username}, {todo.get('completed')}, " \
+              f"{todo.get('title')}"
         list_to_export.append(row)
+    print(list_to_export)
+    dict_to_export[eval('user_id')] = list_to_export
 
-    with open(csv_filename, 'w') as filename:
-        writer = csv.writer(filename, quoting=csv.QUOTE_ALL)
-        for row in list_to_export:
-            sub_string = row.split(', ')
-            writer.writerow(sub_string)
+    print(dict_to_export)
+    with open(json_filename, "w") as f:
+        json.dump(dict_to_export, f)
