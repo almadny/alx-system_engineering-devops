@@ -18,7 +18,7 @@ if __name__ == "__main__":
     json_filename = "{}.{}".format(int(sys.argv[1]), "json")
     emp_username = ''
     list_to_export = []
-    dict_to_export = {}
+    json_dict = {}
 
     for todo in todo_dict:
         if todo.get('userId') == user_id:
@@ -28,13 +28,16 @@ if __name__ == "__main__":
         if emp.get('id') == user_id:
             emp_username = emp.get('username')
 
-    for todo in emp_todo:
-        row = f"{str(user_id)}, {emp_username}, {todo.get('completed')}, " \
-              f"{todo.get('title')}"
-        list_to_export.append(row)
-    print(list_to_export)
-    dict_to_export[eval('user_id')] = list_to_export
+    for i in range(len(emp_todo)):
+        dict_to_export = {}
+        for todo in emp_todo:
+            dict_to_export["task"] = todo.get('title')
+            dict_to_export["completed"] = todo.get('completed')
+            dict_to_export["username"] = emp_username
+        print(dict_to_export)
+        list_to_export.append(dict_to_export)
+        json_dict["{}".format(user_id)] = list_to_export
+        print(json_dict)
 
-    print(dict_to_export)
     with open(json_filename, "w") as f:
-        json.dump(dict_to_export, f)
+        json.dump(json_dict, f)
