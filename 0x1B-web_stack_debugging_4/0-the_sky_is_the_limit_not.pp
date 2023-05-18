@@ -1,9 +1,8 @@
-# Increase the server response limits
-exec {'Increase-server-response-limits':
-	command => "/usr/bin/sed -i 's/15/2000/g' /etc/default/nginx",
-}
+# Manifest to change number of open files by a worker process
 
-exec { 'nginx-restart':
-  command     => '/usr/sbin/service nginx restart',
-  path        => '/usr/sbin:/usr/bin:/sbin:/bin',
-} 
+exec {'change_open_file_limit':
+        command => "/bin/sed -i 's/15/4096/g' /etc/default/nginx",
+}
+exec {'restart_nginx':
+        command => "/usr/sbin/service nginx restart"
+}
