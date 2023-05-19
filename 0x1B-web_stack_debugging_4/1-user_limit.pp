@@ -6,4 +6,4 @@ exec { 'increase-hard-limit':
 
 exec { 'increase-soft-limit':
   command => '/bin/sed -i "s/4/190/" /etc/security/limits.conf',
-}  
+}
